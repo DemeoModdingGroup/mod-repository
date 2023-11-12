@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repo.demeomods.app/schema/project-v1.json",
+  "title": "Demeo Mods Project v1 Schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "title": "The schema_version field",
+      "type": "integer",
+      "default": 1,
+      "const": 1
+    },
+    "schema_type": {
+      "title": "The schema_type field",
+      "type": "string",
+      "enum": ["project", "versions"],
+      "default": "project",
+      "const": "project"
+    },
+    "name": {
+      "title": "The name field",
+      "type": "string"
+    },
+    "icon": {
+      "title": "The icon field",
+      "type": "string",
+      "format": "uri"
+    },
+    "description": {
+      "title": "The description field",
+      "type": "string"
+    },
+    "contact": {
+      "title": "The contact field",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri"
+        },
+        "issues": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sources": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "license": {
+      "title": "The license field",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string",
+              "description": "A SPDX license identifier"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": {
+              "type": "string"
+            },
+            "required": ["name", "id", "url"]
+          }
+        }
+      ]
+    },
+    "contributors": {
+      "title": "The contributors field",
+      "description": "A collection of key: value pairs where the key is a person or group and the value is their role or a list of their roles.",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "schema_type",
+    "name",
+    "description"
+  ]
+}

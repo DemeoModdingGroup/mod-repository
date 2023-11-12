@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "https://repo.demeomods.app/schema/core.json",
+  "title": "Demeo Mods Core Schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [1],
+      "default": 1
+    },
+    "schema_type": {
+      "enum": [
+        "project",
+        "versions"
+      ],
+      "default": "project"
+    }
+  },
+  "oneOf": [
+    {
+      "allOf": [
+        {
+          "properties": {
+            "schema_version": {
+              "const": 1
+            },
+            "schema_type": {
+              "const": "project"
+            }
+          }
+        },
+        {
+          "$ref": "https://repo.demeomods.app/schema/project-v1.json"
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "properties": {
+            "schema_version": {
+              "const": 1
+            },
+            "schema_type": {
+              "const": "versions"
+            }
+          }
+        },
+        {
+          "$ref": "https://repo.demeomods.app/schema/versions-v1.json"
+        }
+      ]
+    }
+  ]
+}

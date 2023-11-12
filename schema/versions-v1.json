@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repo.demeomods.app/schema/versions-v1.json",
+  "title": "Demeo Mods Versions v1 Schema",
+  "type": "object",
+  "$defs": {
+    "version_object": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "string"
+            },
+            "max": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "dependency_object": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/$defs/version_object"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "title": "The schema_version field",
+      "type": "integer",
+      "default": 1,
+      "const": 1
+    },
+    "schema_type": {
+      "title": "The schema_type field",
+      "type": "string",
+      "enum": ["project", "versions"],
+      "default": "versions",
+      "const": "versions"
+    },
+    "latest": {
+      "title": "The latest field",
+      "type": "string"
+    },
+    "latest_stable": {
+      "title": "The latest field",
+      "type": "string"
+    },
+    "versions": {
+      "title": "The versions field",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "loader": {
+            "type": "string",
+            "enum": [
+              "built-in",
+              "MelonLoader",
+              "BepInEx"
+            ]
+          },
+          "changelog": {
+            "type": "string"
+          },
+          "stable": {
+            "type": "boolean"
+          },
+          "release_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "demeo": {
+            "$ref": "#/$defs/version_object"
+          },
+          "depends": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/dependency_object"
+            }
+          },
+          "breaks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/dependency_object"
+            }
+          },
+          "file": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "url", "sha256"]
+          }
+        },
+        "required": [
+          "name",
+          "loader",
+          "demeo",
+          "file"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "schema_type",
+    "latest",
+    "latest_stable",
+    "versions"
+  ]
+}
