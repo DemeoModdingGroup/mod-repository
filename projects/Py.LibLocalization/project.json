@@ -1,0 +1,15 @@
+{
+    "schema_version": 1,
+    "schema_type": "project",
+    "name": "Py.LibLocalization",
+    "description": "A simple library for adding custom localizations to Demeo.",
+    "contact": {
+        "sources": "https://github.com/JustPyrrha/Py.LibLocalization",
+        "issues": "https://github.com/JustPyrrha/Py.LibLocalization/issues"
+    },
+    "license": {
+        "name": "MIT License",
+        "id": "MIT",
+        "url": "https://github.com/JustPyrrha/Py.LibLocalization/blob/main/LICENSE"
+    }
+}
